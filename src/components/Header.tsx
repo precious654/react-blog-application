@@ -1,5 +1,5 @@
 import React from 'react'
-import { Link } from 'react-router-dom';
+import { Link, Outlet } from 'react-router-dom';
 import styled from 'styled-components';
 import ButtonStyled from '../styles/ButtonStyle';
 
@@ -45,19 +45,22 @@ const HeaderStyle = styled.header`
 
 function Header() {
   return (
-    <HeaderStyle>
-      <h2>Bloger</h2>
+    <div>
+      <HeaderStyle>
+        <Link to='/' className='link'><h2>Bloger</h2></Link>
 
-      <ul>
-        <li><Link to='/' className='link'>Overview</Link></li>
-        <li><Link to='/' className='link'>Add Post</Link></li>
-      </ul>
+        <ul>
+          <li><Link to='/' className='link'>Overview</Link></li>
+          <li><Link to='/' className='link'>Add Post</Link></li>
+        </ul>
 
-      <div>
-        <ButtonStyled>Sign Up</ButtonStyled>
-        <ButtonStyled>Log In</ButtonStyled>
-      </div>
-    </HeaderStyle>
+        <div>
+          <Link to='/sign-up'><ButtonStyled>Sign Up</ButtonStyled></Link>
+          <Link to='/sign-in'><ButtonStyled>Log In</ButtonStyled></Link>
+        </div>
+      </HeaderStyle>
+      <Outlet />
+    </div>
   )
 }
 
