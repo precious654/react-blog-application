@@ -2,8 +2,8 @@ import React from 'react'
 
 function Home() {
   return (
-    <div>
-      <p>Home</p>
+    <div style={{ marginBlockStart: '5rem'}}>
+      <h1>Home</h1>
     </div>
   )
 }

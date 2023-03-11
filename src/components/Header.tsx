@@ -1,5 +1,5 @@
 import React from 'react'
-import { Link, Outlet } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import styled from 'styled-components';
 import ButtonStyled from '../styles/ButtonStyle';
 
@@ -36,9 +36,21 @@ const HeaderStyle = styled.header`
         color: inherit;
     }
 
+    .link-active{
+      color: #333333;
+      text-decoration: none;
+    }
+
     @media(max-width: 768px) {
+      
+        justify-content: center;
+
         div{
             display: none;
+        }
+
+        ul{
+          display: none;
         }
     }
 `
@@ -47,19 +59,30 @@ function Header() {
   return (
     <div>
       <HeaderStyle>
-        <Link to='/' className='link'><h2>Bloger</h2></Link>
+        <NavLink to='/' className='link'><h2>Bloger</h2></NavLink>
 
         <ul>
-          <li><Link to='/' className='link'>Overview</Link></li>
-          <li><Link to='/' className='link'>Add Post</Link></li>
+          <li>
+            <NavLink to='/' className={ (obj) => obj.isActive ? 'link-active' : 'link'}>
+              Overview
+            </NavLink>
+          </li>
+          <li>
+            <NavLink to='/' className={ (obj) => obj.isActive ? 'link-active' : 'link'}>
+              Add Post
+            </NavLink>
+          </li>
         </ul>
 
         <div>
-          <Link to='/sign-up'><ButtonStyled>Sign Up</ButtonStyled></Link>
-          <Link to='/sign-in'><ButtonStyled>Log In</ButtonStyled></Link>
+          <NavLink to='/sign-up'>
+            <ButtonStyled>Sign Up</ButtonStyled>
+          </NavLink>
+          <NavLink to='/sign-in'>
+            <ButtonStyled>Log In</ButtonStyled>
+          </NavLink>
         </div>
       </HeaderStyle>
-      <Outlet />
     </div>
   )
 }

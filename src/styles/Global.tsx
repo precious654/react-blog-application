@@ -10,6 +10,7 @@ const Global = createGlobalStyle`
     body{
         font-family: 'Montserrat', sans-serif;
         font-size: 15px;
+        color: #333333;
     }
 
     .container{
@@ -21,7 +22,7 @@ const Global = createGlobalStyle`
         padding: 1rem;
         border-radius: 0.7rem;
         color: #333333;
-        font-family: font-family: 'Montserrat', sans-serif; 
+        font-family: 'Montserrat', sans-serif; 
         border: none;
         inline-size: 50%;
     }
