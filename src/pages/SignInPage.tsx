@@ -1,39 +1,49 @@
 import React from 'react'
 import FormStyle from '../styles/FormStyle';
 import ButtonStyled from '../styles/ButtonStyle';
+import { useForm } from "react-hook-form";
+import swal from 'sweetalert';
 
 function SignInPage() {
 
-    const[ formData, setFormData] = React.useState({
-        email: '',
-        password: ''
-    });
+  const { register, handleSubmit, formState: { errors } } = useForm();
+    
+  function onSubmit(data: any) {
+    console.log( data )
 
-    interface data{
-        target: {
-            name: string,
-            value: string
-        }
-    }
+    swal(
+      {
+        title: 'Welcome',
+        text: 'You have successfully logged in',
+        icon: 'success',
+      }
+    )
+  }
     
-    function handleChange(event: data) {
-        setFormData( (prevState) => ({
-            ...prevState,
-            [event.target.name]: event.target.value
-        }))
-    }
-    
-    console.log( formData );
 
   return (
     <div style={{ marginBlockStart: '7rem'}}>
-      <FormStyle>
-        <input type="email" name='email' placeholder='Email' onChange={ handleChange } />
-        <input type="password" name='password' placeholder='Password' onChange={ handleChange } />
+      <FormStyle onSubmit={ handleSubmit(onSubmit) }>
+
+          <input 
+          type="email" 
+          placeholder='Email'
+          {...register('email', {required: true})} 
+          />
+          {errors.email &&  <span>Please input your email</span>}
+  
+          <input 
+          type="password" 
+          placeholder='Password' 
+          {...register('password', {required: true, minLength: 10, maxLength: 15})}
+          />
+          {errors.password?.type === 'maxLength' &&  <span>The password is too long</span>}
+          {errors.password?.type === 'minLength' &&  <span>The password is too short</span>}
 
         <div>
             <ButtonStyled> Log In</ButtonStyled>
         </div>
+
       </FormStyle>
     </div>
   )

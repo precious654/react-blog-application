@@ -64,11 +64,11 @@ function Header() {
         <ul>
           <li>
             <NavLink to='/' className={ (obj) => obj.isActive ? 'link-active' : 'link'}>
-              Overview
+              Blog
             </NavLink>
           </li>
           <li>
-            <NavLink to='/' className={ (obj) => obj.isActive ? 'link-active' : 'link'}>
+            <NavLink to='/post' className={ (obj) => obj.isActive ? 'link-active' : 'link'}>
               Add Post
             </NavLink>
           </li>

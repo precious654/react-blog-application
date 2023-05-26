@@ -35,6 +35,22 @@ const Global = createGlobalStyle`
         color: #e2e2e2;
         font-family: font-family: 'Montserrat', sans-serif;
     }
+
+    textarea{
+        inline-size: 50%;
+        color: #333333;
+        border: none;
+        font-family: 'Montserrat', sans-serif;
+        padding: 1rem;
+
+        &:hover{
+            box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1);
+        }
+
+        &::placeholder{
+            color: #e2e2e2;
+        }
+    }
 `
 
 export default Global;

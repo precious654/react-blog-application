@@ -1,40 +1,57 @@
 import React from 'react'
 import FormStyle from '../styles/FormStyle';
 import ButtonStyled from '../styles/ButtonStyle';
+import { useForm } from 'react-hook-form';
+import swal from 'sweetalert';
 
 function SignUpPage() {
 
-    const[ formData, setFormData] = React.useState({
-        firstname: '',
-        lastname: '',
-        email: '',
-        password: ''
-    });
+    const { register, handleSubmit, formState: { errors } } = useForm();
 
-    interface data{
-        target: {
-            name: string,
-            value: string
+    function onSubmit(data: any) {
+       console.log( data );
+
+       swal(
+        {
+            title: 'Welcome',
+            text: 'You have signed up sucessfully',
+            icon: 'success',
         }
+       )
     }
-
-    function handleChange(event: data) {
-        setFormData( (prevState) => ({
-            ...prevState,
-            [event.target.name]: event.target.value
-        }))
-    }
-
-    console.log( formData );
-    
 
   return (
     <div style={{ marginBlockStart: '7rem'}}>
-        <FormStyle>
-            <input type="text" name='firstname' placeholder='FirstName' onChange={ handleChange } />
-            <input type="text" name='lastname' placeholder='LastName' onChange={ handleChange } />
-            <input type="email" name='email' placeholder='Email' onChange={ handleChange } />
-            <input type="password" name='password' placeholder='Password' onChange={ handleChange } />
+        <FormStyle onSubmit={ handleSubmit(onSubmit) }>
+            <input 
+            type="text" 
+            placeholder='FirstName' 
+            {...register('firstname', { required: true })}
+            />
+            {errors.firstname &&  <span>Please input your firstname</span>}
+
+            <input 
+            type="text" 
+            placeholder='LastName'
+            {...register('lastname', { required: true })} 
+            />
+            {errors.lastname &&  <span>Please input your lastname</span>}
+
+            <input 
+            type="email" 
+            placeholder='Email' 
+            {...register('email', { required: true })}
+            />
+            {errors.email &&  <span>Please input your email</span>}
+
+            <input 
+            type="password" 
+            placeholder='Password'
+            {...register('password', { required: true, minLength: 10, maxLength: 15})} 
+            />
+            {errors.password?.type === 'required' &&  <span>Please input your password</span>}
+            {errors.password?.type === 'minLength' &&  <span>Your password is too short</span>}
+            {errors.password?.type === 'maxLength' &&  <span>Your password is too long</span>}
 
             <div>
                 <ButtonStyled> Sign Up</ButtonStyled>
